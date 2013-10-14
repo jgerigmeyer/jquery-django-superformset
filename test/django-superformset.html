@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Django Superformset Test Suite</title>
+  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+  <script src="../libs/jquery-loader.js"></script>
+  <!-- Load local QUnit. -->
+  <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+  <script src="../libs/qunit/qunit.js"></script>
+  <script src="../libs/qunit/sinon.js"></script>
+  <script src="../libs/qunit/sinon-qunit.js"></script>
+  <!-- Load local lib and tests. -->
+  <script src="../src/django-superformset.js"></script>
+  <script src="django-superformset_test.js"></script>
+  <!-- Removing access to jQuery and $. But it'll still be available as _$, if
+       you REALLY want to mess around with jQuery in the console. REMEMBER WE
+       ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
+  <script>window._$ = jQuery.noConflict(true);</script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+    <form class="container">
+      <div class="formlist">
+        <input id="test-form-TOTAL_FORMS" type="hidden" value="1">
+        <input id="test-form-MAX_NUM_FORMS" type="hidden" value="3">
+        <div class="dynamic-form">
+          <input type="checkbox" class="test-input" name="test-input" required />
+        </div>
+        <div class="add"></div>
+      </div>
+      <div class="empty-form">
+        <div class="dynamic-form">
+          <input type="checkbox" id="template-input" class="test-input" required />
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
