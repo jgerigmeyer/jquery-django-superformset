@@ -105,4 +105,5 @@ $('.formlist').superformset({
 
 ## Release History
 
+* 1.0.1 - (02/19/2014) Add bower.json
 * 1.0.0 - (10/14/2013) Initial release
