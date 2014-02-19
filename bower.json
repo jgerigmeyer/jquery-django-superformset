@@ -1,0 +1,27 @@
+{
+  "name": "django-superformset",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jgerigmeyer/jquery-django-superformset",
+  "authors": [
+    "Jonny Gerig Meyer <jonny@oddbird.net>"
+  ],
+  "description": "jQuery Django Dynamic Formset Plugin",
+  "main": "dist/django-superformset.js",
+  "keywords": [
+    "formset",
+    "dynamic",
+    "django"
+  ],
+  "license": "BSDv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "libs",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "jquery": "*"
+  }
+}
