@@ -71,6 +71,7 @@ $('.formlist').superformset({
                                     // ...``addTrigger`` will be ignored
     addedCallback: null,            // Function called each time a new form row is added
     removedCallback: null,          // Function called each time a form row is deleted
+    deletedRowClass: 'deleted',     // Added to deleted row if ``canDelete: false``
     addAnimationSpeed: 'normal',    // Speed (ms) to animate adding rows
                                     // ...If false, new rows will appear without animation
     removeAnimationSpeed: 'fast',   // Speed (ms) to animate removing rows
@@ -105,5 +106,6 @@ $('.formlist').superformset({
 
 ## Release History
 
+* 1.0.2 - (02/20/2014) Add deletedRowClass option
 * 1.0.1 - (02/19/2014) Add bower.json
 * 1.0.0 - (10/14/2013) Initial release

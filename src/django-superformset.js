@@ -173,6 +173,8 @@
             for (i = 0; i < rows.length; i = i + 1) {
               updateSequence(rows, i);
             }
+            // If a post-delete callback was provided, call it with deleted form
+            if (opts.removedCallback) { opts.removedCallback(thisRow); }
           };
           if (opts.removeAnimationSpeed) {
             $.when(
@@ -184,8 +186,6 @@
           } else {
             removeRow();
           }
-          // If a post-delete callback was provided, call it with deleted form:
-          if (opts.removedCallback) { opts.removedCallback(thisRow); }
           e.preventDefault();
         });
       } else {
@@ -195,9 +195,13 @@
           var trigger = $(this);
           var thisRow = trigger.closest(opts.rowSel);
           if (trigger.prop('checked')) {
+            thisRow.addClass(opts.deletedRowClass);
             thisRow.find('[required]').removeAttr('required')
               .addClass('deleted-required');
+            // If a post-delete callback was provided, call it with deleted form
+            if (opts.removedCallback) { opts.removedCallback(thisRow); }
           } else {
+            thisRow.removeClass(opts.deletedRowClass);
             thisRow.find('.deleted-required').attr('required', 'required')
               .removeClass('deleted-required');
           }
@@ -371,6 +375,7 @@
                                   // ...if provided, ``addTrigger`` is ignored
     addedCallback: null,          // Fn called each time a new form row is added
     removedCallback: null,        // Fn called each time a form row is deleted
+    deletedRowClass: 'deleted',   // Add to deleted row if ``canDelete: false``
     addAnimationSpeed: 'normal',  // Speed (ms) to animate adding rows
                                   // ...If false, new rows appear w/o animation
     removeAnimationSpeed: 'fast', // Speed (ms) to animate removing rows

@@ -452,6 +452,24 @@
     ok(callback.args[0][0].is(this.row), 'removedCallback was passed row');
   });
 
+  test('when deleteTriggerSel is checked, calls opts.removedCallback with row', function () {
+    var callback = this.vars.opts.removedCallback = sinon.spy();
+    var deleteTrigger = $('<input type="checkbox" class="remove-row" checked />').appendTo(this.row);
+    this.formlist.superformset('addDeleteTrigger', this.row, false, this.vars);
+    deleteTrigger.trigger('change');
+
+    ok(callback.calledOnce, 'removedCallback was called once');
+    ok(callback.args[0][0].is(this.row), 'removedCallback was passed row');
+  });
+
+  test('when deleteTriggerSel is checked, adds .deleted to row', function () {
+    var deleteTrigger = $('<input type="checkbox" class="remove-row" checked />').appendTo(this.row);
+    this.formlist.superformset('addDeleteTrigger', this.row, false, this.vars);
+    deleteTrigger.trigger('change');
+
+    ok(this.row.hasClass('deleted'), 'row has .deleted');
+  });
+
   test('when deleteTriggerSel is checked, removes :required attr and adds .deleted-required', function () {
     var deleteTrigger = $('<input type="checkbox" class="remove-row" checked />').appendTo(this.row);
     this.formlist.superformset('addDeleteTrigger', this.row, false, this.vars);
@@ -468,6 +486,14 @@
 
     strictEqual(this.input.attr('required'), 'required', 'input is now :required');
     ok(!this.input.hasClass('deleted-required'), 'input no longer has .deleted-required');
+  });
+
+  test('when deleteTriggerSel is unchecked, removes .deleted from row', function () {
+    var deleteTrigger = $('<input type="checkbox" class="remove-row deleted-required" />').appendTo(this.row);
+    this.formlist.superformset('addDeleteTrigger', this.row, false, this.vars);
+    deleteTrigger.trigger('change');
+
+    ok(!this.row.hasClass('deleted'), 'row does not have .deleted');
   });
 
 
