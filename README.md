@@ -1,5 +1,8 @@
 # Django Superformset
 
+[![Build Status](https://travis-ci.org/jgerigmeyer/jquery-django-superformset.svg?branch=master)](https://travis-ci.org/jgerigmeyer/jquery-django-superformset)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 jQuery Django Dynamic Formset Plugin
 
 ## Getting Started
