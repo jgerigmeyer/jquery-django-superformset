@@ -46,7 +46,7 @@ jQuery(function($) {
 
 ## Documentation
 
-There are numerous options documented in the [development version].
+There are numerous options documented in the [development version][max].
 
 Available options, explictly set to their defaults:
 
@@ -104,8 +104,6 @@ $('.formlist').superformset({
                                     // ...(requires ``optionalIfEmpty: true``)
 });
 ```
-
-[development version]: https://raw.github.com/jgerigmeyer/jquery-django-superformset/master/dist/django-superformset.js
 
 ## Release History
 
