@@ -1,4 +1,4 @@
-/*! Django Superformset - v1.0.2 - 2014-02-20
+/*! Django Superformset - v1.0.3 - 2014-04-16
 * https://github.com/jgerigmeyer/jquery-django-superformset
 * Based on jQuery Formset 1.1r14, by Stanislaus Madueke
 * Original Portions Copyright (c) 2009 Stanislaus Madueke
@@ -15,9 +15,9 @@
       var rows = vars.rows = wrapper.find(opts.rowSel);
       var container = vars.container = rows.closest(opts.containerSel);
       vars.totalForms = wrapper
-        .find('input[id$="-' + opts.prefix + '-TOTAL_FORMS"]');
+        .find('input[id$="' + opts.prefix + '-TOTAL_FORMS"]');
       vars.maxForms = wrapper
-        .find('input[id$="-' + opts.prefix + '-MAX_NUM_FORMS"]');
+        .find('input[id$="' + opts.prefix + '-MAX_NUM_FORMS"]');
 
       // Clone the form template to generate new form instances
       var tpl = vars.tpl = container.find(opts.formTemplate).clone(true);

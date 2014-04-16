@@ -22,9 +22,9 @@
       var rows = vars.rows = wrapper.find(opts.rowSel);
       var container = vars.container = rows.closest(opts.containerSel);
       vars.totalForms = wrapper
-        .find('input[id$="-' + opts.prefix + '-TOTAL_FORMS"]');
+        .find('input[id$="' + opts.prefix + '-TOTAL_FORMS"]');
       vars.maxForms = wrapper
-        .find('input[id$="-' + opts.prefix + '-MAX_NUM_FORMS"]');
+        .find('input[id$="' + opts.prefix + '-MAX_NUM_FORMS"]');
 
       // Clone the form template to generate new form instances
       var tpl = vars.tpl = container.find(opts.formTemplate).clone(true);
