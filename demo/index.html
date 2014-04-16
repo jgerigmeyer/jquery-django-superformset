@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Page Info -->
+    <title>Static Demo | jQuery Django Superformset</title>
+
+    <!-- Site Info -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Jonny Gerig Meyer" />
+    <meta name="keywords" content="jquery django dynamic formset demo" />
+    <meta name="language" content="en-us" />
+    <meta name="description" content="Demo for jQuery Django Dynamic Formset Plugin" />
+
+    <!-- CSS -->
+    <link type="text/css" href="demo.css" rel="stylesheet"></link>
+
+    <!-- JavaScript -->
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/django-superformset.min.js"></script>
+  </head>
+
+  <body>
+    <div class="demo">
+      <div class="demo-content">
+        <button type="button" class="init">Initialize Superformset Plugin</button>
+        <form method="post">
+          <fieldset class="formlist">
+            <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="3">
+            <input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="2">
+            <input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000">
+            <div class="dynamic-form">
+              <label for="id_form-0-name">Name:</label>
+              <input id="id_form-0-name" maxlength="200" name="form-0-name" type="text" value="foo">
+              <label for="id_form-0-complete">Complete:</label>
+              <input checked="checked" id="id_form-0-complete" name="form-0-complete" type="checkbox">
+              <label for="id_form-0-DELETE">Delete:</label>
+              <input id="id_form-0-DELETE" name="form-0-DELETE" type="checkbox">
+              <input id="id_form-0-id" name="form-0-id" type="hidden" value="1">
+            </div>
+            <div class="dynamic-form">
+              <label for="id_form-1-name">Name:</label>
+              <input id="id_form-1-name" maxlength="200" name="form-1-name" type="text" value="bar">
+              <label for="id_form-1-complete">Complete:</label>
+              <input id="id_form-1-complete" name="form-1-complete" type="checkbox">
+              <label for="id_form-1-DELETE">Delete:</label>
+              <input id="id_form-1-DELETE" name="form-1-DELETE" type="checkbox">
+              <input id="id_form-1-id" name="form-1-id" type="hidden" value="2">
+            </div>
+            <div class="dynamic-form">
+              <label for="id_form-2-name">Name:</label>
+              <input id="id_form-2-name" maxlength="200" name="form-2-name" type="text">
+              <label for="id_form-2-complete">Complete:</label>
+              <input id="id_form-2-complete" name="form-2-complete" type="checkbox">
+              <label for="id_form-2-DELETE">Delete:</label>
+              <input id="id_form-2-DELETE" name="form-2-DELETE" type="checkbox">
+              <input id="id_form-2-id" name="form-2-id" type="hidden">
+            </div>
+          </fieldset>
+        </form>
+        <div class="empty-form" style="display: none;">
+          <div class="dynamic-form">
+            <label for="id_form-__prefix__-name">Name:</label>
+            <input id="id_form-__prefix__-name" maxlength="200" name="form-__prefix__-name" type="text">
+            <label for="id_form-__prefix__-complete">Complete:</label>
+            <input id="id_form-__prefix__-complete" name="form-__prefix__-complete" type="checkbox">
+            <label for="id_form-__prefix__-DELETE">Delete:</label>
+            <input id="id_form-__prefix__-DELETE" name="form-__prefix__-DELETE" type="checkbox">
+            <input id="id_form-__prefix__-id" name="form-__prefix__-id" type="hidden">
+          </div>
+        </div>
+      </div>
+
+      <div class="code-samples">
+        <div class="js">
+          <h2>JavaScript: </h2>
+          <pre>
+jQuery(function($) {
+  $('.init').one('click', function () {
+    $('.formlist').superformset({
+      containerSel: '.demo',
+      deleteTriggerSel: 'input[name$="-DELETE"]'
+    });
+  });
+});
+          </pre>
+        </div>
+        <div class="html">
+          <h2>Django Template: </h2>
+          <pre>
+&lt;form method="post"&gt;
+  &lt;fieldset class="formlist"&gt;
+    {{ formset.management_form }}
+    {% for form in formset %}
+    &lt;div class="dynamic-form"&gt;
+      {{ form }}
+    &lt;/div&gt;
+    {% endfor %}
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+
+&lt;div class="empty-form" style="display: none;"&gt;
+  &lt;div class="dynamic-form"&gt;
+    {{ formset.empty_form }}
+  &lt;/div&gt;
+&lt;/div&gt;
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      jQuery(function($) {
+        $('.init').one('click', function () {
+          $('.formlist').superformset({
+            containerSel: '.demo',
+            deleteTriggerSel: 'input[name$="-DELETE"]'
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
