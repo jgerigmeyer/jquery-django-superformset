@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-django-superformset by jgerigmeyer</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery-django-superformset</h1>
+        <p>jQuery Django Dynamic Formset Plugin</p>
+
+        <p class="view"><a href="https://github.com/jgerigmeyer/jquery-django-superformset">View the Project on GitHub <small>jgerigmeyer/jquery-django-superformset</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jgerigmeyer/jquery-django-superformset/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jgerigmeyer/jquery-django-superformset/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jgerigmeyer/jquery-django-superformset">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="django-superformset" class="anchor" href="#django-superformset"><span class="octicon octicon-link"></span></a>Django Superformset</h1>
+
+<p><a href="https://travis-ci.org/jgerigmeyer/jquery-django-superformset"><img src="https://travis-ci.org/jgerigmeyer/jquery-django-superformset.svg?branch=master" alt="Build Status"></a>
+<a href="http://gruntjs.com/"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a></p>
+
+<p>jQuery Django Dynamic Formset Plugin</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Download the <a href="https://raw.github.com/jgerigmeyer/jquery-django-superformset/master/dist/django-superformset.min.js">production version</a> or the <a href="https://raw.github.com/jgerigmeyer/jquery-django-superformset/master/dist/django-superformset.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;fieldset</span> <span class="na">class=</span><span class="s">"formlist"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"form-TOTAL_FORMS"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"form-MAX_NUM_FORMS"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dynamic-form"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"remove-row"</span> <span class="na">name=</span><span class="s">"form-0-DELETE"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"form-0-input"</span> <span class="nt">/&gt;</span>
+      <span class="c">&lt;!-- any other inputs... --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"empty-form"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dynamic-form"</span> <span class="na">data-empty-permitted=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"remove-row"</span> <span class="na">name=</span><span class="s">"form-__prefix__-DELETE"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"form-__prefix__-input"</span> <span class="nt">/&gt;</span>
+      <span class="c">&lt;!-- any other inputs... --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/django-superformset.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'.formlist'</span><span class="p">).</span><span class="nx">superformset</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>There are numerous options documented in the <a href="https://raw.github.com/jgerigmeyer/jquery-django-superformset/master/dist/django-superformset.js">development version</a>.</p>
+
+<p>Available options, explictly set to their defaults:</p>
+
+<div class="highlight highlight-html"><pre>$('.formlist').superformset({
+    prefix: 'form',                 // The form prefix for your django formset
+    containerSel: 'form',           // Container selector (must contain rows and formTemplate)
+    rowSel: '.dynamic-form',        // Selector used to match each form (row) in a formset
+    formTemplate: '.empty-form .dynamic-form',
+                                    // Selector for empty form (row) template to be cloned to
+                                    // ...generate new form instances
+                                    // ...This must be outside the element on which ``formset`` is
+                                    // ...called, but within the containerSel
+    deleteTrigger: '<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"remove-row"</span> <span class="na">title=</span><span class="s">"remove"</span><span class="nt">&gt;</span>remove<span class="nt">&lt;/a&gt;</span>',
+                                    // The HTML "remove" link added to the end of each form-row
+                                    // ...(if ``canDelete: true``)
+    deleteTriggerSel: '.remove-row',// Selector for HTML "remove" links
+                                    // ...Used to target existing delete-trigger, or to target
+                                    // ...``deleteTrigger``
+    addTrigger: '<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"add-row"</span> <span class="na">title=</span><span class="s">"add"</span><span class="nt">&gt;</span>add<span class="nt">&lt;/a&gt;</span>',
+                                    // The HTML "add" link added to the end of all forms if no
+                                    // ...``addTriggerSel``
+    addTriggerSel: null,            // Selector for trigger to add a new row, if already in markup
+                                    // ...Used to target existing trigger; if provided,
+                                    // ...``addTrigger`` will be ignored
+    addedCallback: null,            // Function called each time a new form row is added
+    removedCallback: null,          // Function called each time a form row is deleted
+    deletedRowClass: 'deleted',     // Added to deleted row if ``canDelete: false``
+    addAnimationSpeed: 'normal',    // Speed (ms) to animate adding rows
+                                    // ...If false, new rows will appear without animation
+    removeAnimationSpeed: 'fast',   // Speed (ms) to animate removing rows
+                                    // ...If false, new rows will disappear without animation
+    autoAdd: false,                 // If true, the "add" link will be removed, and a row will be
+                                    // ...automatically added when text is entered in the final
+                                    // ...textarea of the last row
+    alwaysShowExtra: false,         // If true, an extra (empty) row will always be displayed
+                                    // ...(requires ``autoAdd: true``)
+    deleteOnlyActive: false,        // If true, extra empty rows cannot be removed until they
+                                    // ...acquire focus (requires ``alwaysShowExtra: true``)
+    canDelete: false,               // If false, rows cannot be deleted (removed from the DOM).
+                                    // ...``deleteTriggerSel`` will remove ``required`` attr from
+                                    // ...fields within a "deleted" row
+                                    // ...deleted rows should be hidden via CSS
+    deleteOnlyNew: false,           // If true, only newly-added rows can be deleted
+                                    // ...(requires ``canDelete: true``)
+    insertAbove: false,             // If true, ``insertAboveTrigger`` will be added to the end of
+                                    // ...each form-row
+    insertAboveTrigger: '<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"insert-row"</span> <span class="na">title=</span><span class="s">"insert"</span><span class="nt">&gt;</span>insert<span class="nt">&lt;/a&gt;</span>',
+                                    // The HTML "insert" link add to the end of each form-row
+                                    // ...(requires ``insertAbove: true``)
+    optionalIfEmpty: true,          // If true, required fields in a row will be optional until
+                                    // ...changed from their initial values
+    optionalIfEmptySel: '[data-empty-permitted="true"]'
+                                    // Selector for rows to apply optionalIfEmpty logic
+                                    // ...(requires ``optionalIfEmpty: true``)
+});
+</pre></div>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+
+<ul>
+<li>1.0.3 - (04/16/2014) Make totalForms and maxForms selectors less restrictive</li>
+<li>1.0.2 - (02/20/2014) Add deletedRowClass option</li>
+<li>1.0.1 - (02/19/2014) Add bower.json</li>
+<li>1.0.0 - (10/14/2013) Initial release</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jgerigmeyer">jgerigmeyer</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
