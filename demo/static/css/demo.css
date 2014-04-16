@@ -1,0 +1,76 @@
+/* Demo page styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+}
+
+.demo {
+  min-width: 34em;
+  max-width: 52em;
+  margin: 1em auto;
+  padding: 1em;
+}
+
+form {
+  clear: both;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.init {
+  float: left;
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  border: none;
+  border-radius: .25em;
+  background: pink;
+  font: inherit;
+  font-size: 1.25em;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  transition: all 150ms;
+}
+
+.init:focus {
+  outline: none;
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+}
+
+.init:hover {
+  cursor: pointer;
+  background: #fd9297;
+}
+
+.init:active {
+  background: #bc6d71;
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.25) inset;
+}
+
+pre {
+  overflow: auto;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace, serif;
+  font-size: .85em;
+  line-height: 1.5em;
+  color: grey;
+}
+
+.code-samples .js {
+  float: left;
+  width: 50%;
+  padding-right: 1em;
+  margin-bottom: 1em;
+}
+
+.code-samples .html {
+  float: right;
+  width: 50%;
+  padding-left: 1em;
+  border-left: 1px dashed;
+  border-color: grey;
+  margin-bottom: 1em;
+}

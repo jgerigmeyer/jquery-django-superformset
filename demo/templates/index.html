@@ -1,0 +1,101 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Page Info -->
+    <title>Demo | jQuery Django Superformset</title>
+
+    <!-- Site Info -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Jonny Gerig Meyer" />
+    <meta name="keywords" content="jquery django dynamic formset demo" />
+    <meta name="language" content="en-us" />
+    <meta name="description" content="Demo for jQuery Django Dynamic Formset Plugin" />
+
+    <!-- CSS -->
+    <link type="text/css" href="{% static 'css/demo.css' %}" rel="stylesheet"></link>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/django-superformset.min.js' %}"></script>
+  </head>
+
+  <body>
+    <div class="demo">
+      <button type="button" class="init">Initialize Superformset Plugin</button>
+      <form method="post">
+        {% csrf_token %}
+        <fieldset class="formlist">
+          {{ formset.management_form }}
+          {% for form in formset %}
+          <div class="dynamic-form">
+            {{ form }}
+          </div>
+          {% endfor %}
+        </fieldset>
+        <button type="submit">Save</button>
+      </form>
+
+      <div class="empty-form" style="display: none;">
+        <div class="dynamic-form">
+          {{ formset.empty_form }}
+        </div>
+      </div>
+
+      <div class="code-samples">
+        <div class="js">
+          <h2>JavaScript: </h2>
+          <pre>
+jQuery(function($) {
+  $('.init').one('click', function () {
+    $('.formlist').superformset({
+      containerSel: '.demo',
+      deleteTriggerSel: 'input[name$="-DELETE"]'
+    });
+  });
+});
+          </pre>
+        </div>
+        <div class="html">
+          <h2>Django Template: </h2>
+          <pre>
+{% verbatim %}
+&lt;form method="post"&gt;
+  {% csrf_token %}
+  &lt;fieldset class="formlist"&gt;
+    {{ formset.management_form }}
+    {% for form in formset %}
+    &lt;div class="dynamic-form"&gt;
+      {{ form }}
+    &lt;/div&gt;
+    {% endfor %}
+  &lt;/fieldset&gt;
+  &lt;button type="submit"&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;div class="empty-form" style="display: none;"&gt;
+  &lt;div class="dynamic-form"&gt;
+    {{ formset.empty_form }}
+  &lt;/div&gt;
+&lt;/div&gt;
+{% endverbatim %}
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      jQuery(function($) {
+        $('.init').one('click', function () {
+          $('.formlist').superformset({
+            containerSel: '.demo',
+            deleteTriggerSel: 'input[name$="-DELETE"]'
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

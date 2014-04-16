@@ -19,7 +19,8 @@
     "bower_components",
     "test",
     "libs",
-    "Gruntfile.js"
+    "Gruntfile.js",
+    "demo"
   ],
   "dependencies": {
     "jquery": "*"

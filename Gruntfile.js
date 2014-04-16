@@ -35,6 +35,10 @@ module.exports = function(grunt) {
         src: '<%= concat.dist.dest %>',
         dest: 'dist/<%= pkg.name %>.min.js'
       },
+      demo: {
+        src: '<%= concat.dist.dest %>',
+        dest: 'demo/static/js/<%= pkg.name %>.min.js'
+      },
     },
     qunit: {
       options: {
