@@ -25,23 +25,27 @@
 
   <body>
     <div class="demo">
-      <button type="button" class="init">Initialize Superformset Plugin</button>
-      <form method="post">
-        {% csrf_token %}
-        <fieldset class="formlist">
-          {{ formset.management_form }}
-          {% for form in formset %}
-          <div class="dynamic-form">
-            {{ form }}
-          </div>
-          {% endfor %}
-        </fieldset>
-        <button type="submit">Save</button>
-      </form>
+      <div class="demo-content">
+        <button type="button" class="init">Initialize Superformset Plugin</button>
+        <input type="checkbox" id="css-input" checked />
+        <label for="css-input">show with demo css</label>
+        <form method="post">
+          {% csrf_token %}
+          <fieldset class="formlist">
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <div class="dynamic-form">
+              {{ form }}
+            </div>
+            {% endfor %}
+          </fieldset>
+          <button type="submit">Save</button>
+        </form>
 
-      <div class="empty-form" style="display: none;">
-        <div class="dynamic-form">
-          {{ formset.empty_form }}
+        <div class="empty-form" style="display: none;">
+          <div class="dynamic-form">
+            {{ formset.empty_form }}
+          </div>
         </div>
       </div>
 

@@ -1,3 +1,30 @@
+/* Superformset demo styles */
+
+@font-face {
+  font-family: "superformset-demo";
+  src: url('../fonts/icons.woff') format("woff"), url('../fonts/icons.ttf') format("truetype");
+}
+
+#css-input:checked ~ form .add-row {
+  font-size: 0.75rem;
+  line-height: 1.3125rem;
+  margin-top: -0.32813rem;
+  float: right;
+  margin-right: 1.64063rem;
+}
+#css-input:checked ~ form .add-row:before {
+  vertical-align: middle;
+  content: "\e600";
+  font-family: "superformset-demo";
+  display: inline-block;
+}
+#css-input:checked ~ form input[type="text"] {
+  width: 80%;
+}
+#css-input:checked ~ form .deleted {
+  display: none;
+}
+
 /* Demo page styles */
 
 * {
@@ -15,10 +42,15 @@ html {
   padding: 1em;
 }
 
+.demo-content {
+  text-align: right;
+}
+
 form {
   clear: both;
   width: 100%;
   margin-bottom: 1em;
+  text-align: left;
 }
 
 .init {
@@ -49,6 +81,11 @@ form {
 .init:active {
   background: #bc6d71;
   box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.25) inset;
+}
+
+label[for="css-input"] {
+  display: inline-block;
+  padding-top: 3em;
 }
 
 pre {
