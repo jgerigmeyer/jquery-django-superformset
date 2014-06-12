@@ -1,4 +1,4 @@
-/*! Django Superformset - v1.0.3 - 2014-04-16
+/*! Django Superformset - v1.0.3 - 2014-06-12
 * https://github.com/jgerigmeyer/jquery-django-superformset
 * Based on jQuery Formset 1.1r14, by Stanislaus Madueke
 * Original Portions Copyright (c) 2009 Stanislaus Madueke
@@ -79,16 +79,25 @@
         var trigger = $(this);
         var formCount = parseInt(vars.totalForms.val(), 10);
         var newRow = vars.tpl.clone(true).addClass('new-row');
+        var lastRow = vars.wrapper.find(opts.rowSel).last();
         newRow.find('input, select, textarea').filter('.required')
           .attr('required', 'required');
         if (opts.addAnimationSpeed) {
-          newRow.hide().insertAfter(vars.wrapper.find(opts.rowSel).last())
-            .animate(
-              {'height': 'toggle', 'opacity': 'toggle'},
-              opts.addAnimationSpeed
-            );
+          if (lastRow.length) {
+            newRow.hide().insertAfter(lastRow);
+          } else {
+            newRow.hide().insertBefore(trigger);
+          }
+          newRow.animate(
+            {'height': 'toggle', 'opacity': 'toggle'},
+            opts.addAnimationSpeed
+          );
         } else {
-          newRow.insertAfter(vars.wrapper.find(opts.rowSel).last()).show();
+          if (lastRow.length) {
+            newRow.insertAfter(lastRow).show();
+          } else {
+            newRow.insertBefore(trigger).show();
+          }
         }
         newRow.find('input, select, textarea, label').each(function () {
           methods.updateElementIndex($(this), opts.prefix, formCount);

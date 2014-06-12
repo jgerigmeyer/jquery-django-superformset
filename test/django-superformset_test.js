@@ -200,6 +200,15 @@
     strictEqual(this.row.next().html(), expected, 'new-row has been appended to formlist');
   });
 
+  test('inserts new row before addButton if no rows exist on addButton click', function () {
+    var expected = this.newRow.html();
+    this.formlist.superformset('activateAddTrigger', this.vars);
+    this.row.remove();
+    this.addButton.trigger('click');
+
+    strictEqual(this.addButton.prev().html(), expected, 'new-row has been inserted above addButton');
+  });
+
   test('animates display of new row if opts.addAnimationSpeed', function () {
     sinon.stub($.fn, 'animate');
     this.vars.opts.addAnimationSpeed = 'test-speed';
@@ -208,6 +217,19 @@
 
     ok(this.row.next().animate.calledOnce, 'new-row .animate was called once');
     ok(this.row.next().animate.calledWith({'height': 'toggle', 'opacity': 'toggle'}, 'test-speed'), 'new-row .animate was passed addAnimationSpeed');
+
+    $.fn.animate.restore();
+  });
+
+  test('animates display of new row if opts.addAnimationSpeed and no rows exist', function () {
+    sinon.stub($.fn, 'animate');
+    this.vars.opts.addAnimationSpeed = 'test-speed';
+    this.formlist.superformset('activateAddTrigger', this.vars);
+    this.row.remove();
+    this.addButton.trigger('click');
+
+    ok(this.addButton.prev().animate.calledOnce, 'new-row .animate was called once');
+    ok(this.addButton.prev().animate.calledWith({'height': 'toggle', 'opacity': 'toggle'}, 'test-speed'), 'new-row .animate was passed addAnimationSpeed');
 
     $.fn.animate.restore();
   });

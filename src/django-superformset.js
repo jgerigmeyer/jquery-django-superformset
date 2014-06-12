@@ -86,16 +86,25 @@
         var trigger = $(this);
         var formCount = parseInt(vars.totalForms.val(), 10);
         var newRow = vars.tpl.clone(true).addClass('new-row');
+        var lastRow = vars.wrapper.find(opts.rowSel).last();
         newRow.find('input, select, textarea').filter('.required')
           .attr('required', 'required');
         if (opts.addAnimationSpeed) {
-          newRow.hide().insertAfter(vars.wrapper.find(opts.rowSel).last())
-            .animate(
-              {'height': 'toggle', 'opacity': 'toggle'},
-              opts.addAnimationSpeed
-            );
+          if (lastRow.length) {
+            newRow.hide().insertAfter(lastRow);
+          } else {
+            newRow.hide().insertBefore(trigger);
+          }
+          newRow.animate(
+            {'height': 'toggle', 'opacity': 'toggle'},
+            opts.addAnimationSpeed
+          );
         } else {
-          newRow.insertAfter(vars.wrapper.find(opts.rowSel).last()).show();
+          if (lastRow.length) {
+            newRow.insertAfter(lastRow).show();
+          } else {
+            newRow.insertBefore(trigger).show();
+          }
         }
         newRow.find('input, select, textarea, label').each(function () {
           methods.updateElementIndex($(this), opts.prefix, formCount);
