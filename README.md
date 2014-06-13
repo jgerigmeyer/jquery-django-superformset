@@ -107,6 +107,7 @@ $('.formlist').superformset({
 
 ## Release History
 
+* 1.0.4 - (06/13/2014) Bugfix: Allow adding row after deleting all rows with ``canDelete: true``
 * 1.0.3 - (04/16/2014) Make totalForms and maxForms selectors less restrictive
 * 1.0.2 - (02/20/2014) Add deletedRowClass option
 * 1.0.1 - (02/19/2014) Add bower.json

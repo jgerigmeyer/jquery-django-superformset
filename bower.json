@@ -1,6 +1,6 @@
 {
   "name": "django-superformset",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/jgerigmeyer/jquery-django-superformset",
   "authors": [
     "Jonny Gerig Meyer <jonny@oddbird.net>"

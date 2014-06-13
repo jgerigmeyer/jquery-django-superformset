@@ -2,7 +2,7 @@
   "name": "django-superformset",
   "title": "Django Superformset",
   "description": "jQuery Django Dynamic Formset Plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/jgerigmeyer/jquery-django-superformset",
   "author": {
     "name": "Jonny Gerig Meyer",

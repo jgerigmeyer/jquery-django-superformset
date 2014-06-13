@@ -1,4 +1,4 @@
-/*! Django Superformset - v1.0.3 - 2014-06-12
+/*! Django Superformset - v1.0.4 - 2014-06-13
 * https://github.com/jgerigmeyer/jquery-django-superformset
 * Based on jQuery Formset 1.1r14, by Stanislaus Madueke
 * Original Portions Copyright (c) 2009 Stanislaus Madueke
