@@ -118,7 +118,7 @@
         // Check if we've exceeded the maximum allowed number of forms:
         if (!methods.showAddButton(vars)) { trigger.hide(); }
         // If a post-add callback was supplied, call it with the added form:
-        if (opts.addedCallback) { opts.addedCallback(newRow); }
+        if (opts.addedCallback) { opts.addedCallback.call(this, newRow); }
         e.preventDefault();
       });
     },
@@ -185,7 +185,7 @@
               updateSequence(rows, i);
             }
             // If a post-delete callback was provided, call it with deleted form
-            if (opts.removedCallback) { opts.removedCallback(thisRow); }
+            if (opts.removedCallback) { opts.removedCallback.call(this, thisRow); }
           };
           if (opts.removeAnimationSpeed) {
             $.when(
@@ -210,7 +210,7 @@
             thisRow.find('[required]').removeAttr('required')
               .addClass('deleted-required');
             // If a post-delete callback was provided, call it with deleted form
-            if (opts.removedCallback) { opts.removedCallback(thisRow); }
+            if (opts.removedCallback) { opts.removedCallback.call(this, thisRow); }
           } else {
             thisRow.removeClass(opts.deletedRowClass);
             thisRow.find('.deleted-required').attr('required', 'required')
@@ -263,7 +263,7 @@
         // Check if we've exceeded the maximum allowed number of rows:
         if (!methods.showAddButton(e.data.vars)) { $(this).hide(); }
         // If a post-add callback was supplied, call it with the added form:
-        if (e.data.vars.opts.addedCallback) { e.data.vars.opts.addedCallback(newRow); }
+        if (e.data.vars.opts.addedCallback) { e.data.vars.opts.addedCallback.call(this, newRow); }
         $(this).blur();
         e.preventDefault();
     },
@@ -341,7 +341,7 @@
         newRow.find(opts.deleteTriggerSel).hide();
       }
       // If a post-add callback was supplied, call it with the added form
-      if (opts.addedCallback) { opts.addedCallback(newRow); }
+      if (opts.addedCallback) { opts.addedCallback.call(this, newRow); }
     },
 
     // Check if inputs have changed from original state,
