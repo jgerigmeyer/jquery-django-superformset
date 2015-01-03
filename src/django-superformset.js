@@ -36,6 +36,7 @@
       // Add delete-trigger and insert-above-trigger (if applicable) to template
       methods.addDeleteTrigger(tpl, opts.canDelete, vars);
       methods.addInsertAboveTrigger(tpl, vars);
+      methods.addInsertBelowTrigger(tpl, vars);
 
       // Iterate over existing rows...
       rows.each(function () {
@@ -47,6 +48,7 @@
           vars
         );
         methods.addInsertAboveTrigger(thisRow, vars);
+        methods.addInsertBelowTrigger(thisRow, vars);
         // Attaches handlers watching for changes to inputs,
         // ...to add/remove ``required`` attr
         methods.watchForChangesToOptionalIfEmptyRow(thisRow, vars);
@@ -218,46 +220,67 @@
       }
     },
 
+    addRowHandler: function(e) {
+        var above = true;
+        if ('data' in e && 'above' in e.data)
+            above = e.data.above;
+        var thisRow = $(this).closest(e.data.vars.opts.rowSel);
+        var formCount = parseInt(e.data.vars.totalForms.val(), 10);
+        var newRow = e.data.vars.tpl.clone(true).addClass('new-row');
+        var rows, i;
+        var updateSequence = function (rows, i) {
+            rows.eq(i).find('input, select, textarea, label').each(function () {
+                methods.updateElementIndex($(this), e.data.vars.opts.prefix, i);
+            });
+        };
+        newRow.find('input, select, textarea').filter('.required')
+        .attr('required', 'required');
+        if (e.data.vars.opts.addAnimationSpeed) {
+            newRow.hide();
+            if (above)
+                newRow.insertBefore(thisRow);
+            else
+                newRow.insertAfter(thisRow);
+            newRow.animate(
+                {'height': 'toggle', 'opacity': 'toggle'}, e.data.vars.opts.addAnimationSpeed
+            );
+        } else {
+            if (above)
+                newRow.insertBefore(thisRow).show();
+            else
+                newRow.insertAfter(thisRow).show();
+        }
+        // Update the TOTAL_FORMS count:
+        rows = e.data.vars.wrapper.find(e.data.vars.opts.rowSel);
+        e.data.vars.totalForms.val(formCount + 1);
+        // Update names and IDs for child controls so they remain in sequence.
+        for (i = 0; i < rows.length; i = i + 1) {
+            updateSequence(rows, i);
+        }
+        // Attaches handlers watching for changes to inputs,
+        // ...to add/remove ``required`` attr
+        methods.watchForChangesToOptionalIfEmptyRow(newRow, e.data.vars);
+        // Check if we've exceeded the maximum allowed number of rows:
+        if (!methods.showAddButton(e.data.vars)) { $(this).hide(); }
+        // If a post-add callback was supplied, call it with the added form:
+        if (e.data.vars.opts.addedCallback) { e.data.vars.opts.addedCallback(newRow); }
+        $(this).blur();
+        e.preventDefault();
+    },
+
     // Add insert-above trigger before a row, if ``insertAboveTrigger: true``
     addInsertAboveTrigger: function (row, vars) {
       var opts = vars.opts;
       if (opts.insertAbove) {
-        $(opts.insertAboveTrigger).prependTo(row).click(function (e) {
-          var thisRow = $(this).closest(opts.rowSel);
-          var formCount = parseInt(vars.totalForms.val(), 10);
-          var newRow = vars.tpl.clone(true).addClass('new-row');
-          var rows, i;
-          var updateSequence = function (rows, i) {
-            rows.eq(i).find('input, select, textarea, label').each(function () {
-              methods.updateElementIndex($(this), opts.prefix, i);
-            });
-          };
-          newRow.find('input, select, textarea').filter('.required')
-            .attr('required', 'required');
-          if (opts.addAnimationSpeed) {
-            newRow.hide().insertBefore(thisRow).animate(
-              {'height': 'toggle', 'opacity': 'toggle'}, opts.addAnimationSpeed
-            );
-          } else {
-            newRow.insertBefore(thisRow).show();
-          }
-          // Update the TOTAL_FORMS count:
-          rows = vars.wrapper.find(opts.rowSel);
-          vars.totalForms.val(formCount + 1);
-          // Update names and IDs for child controls so they remain in sequence.
-          for (i = 0; i < rows.length; i = i + 1) {
-            updateSequence(rows, i);
-          }
-          // Attaches handlers watching for changes to inputs,
-          // ...to add/remove ``required`` attr
-          methods.watchForChangesToOptionalIfEmptyRow(newRow, vars);
-          // Check if we've exceeded the maximum allowed number of rows:
-          if (!methods.showAddButton(vars)) { $(this).hide(); }
-          // If a post-add callback was supplied, call it with the added form:
-          if (opts.addedCallback) { opts.addedCallback(newRow); }
-          $(this).blur();
-          e.preventDefault();
-        });
+        $(opts.insertAboveTrigger).prependTo(row).click({above:true, vars:vars}, methods.addRowHandler);
+      }
+    },
+
+    // Add insert-above trigger before a row, if ``insertAboveTrigger: true``
+    addInsertBelowTrigger: function (row, vars) {
+      var opts = vars.opts;
+      if (opts.insertBelow) {
+        $(opts.insertBelowTrigger).appendTo(row).click({above:false, vars:vars}, methods.addRowHandler);
       }
     },
 
